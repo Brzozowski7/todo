@@ -1,21 +1,21 @@
+import {useContext} from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Wrapper } from "./App.styles";
-import { DarkModeContextProvider } from "../contexts/DarkModeContext";
 import MainPage from "../pages/MainPage";
+import {DarkModeContext} from "../contexts/DarkModeContext"
 
 function App() {
+  const {isDarkMode} = useContext(DarkModeContext)
   return (
-    <DarkModeContextProvider>
       <Router>
-        <Wrapper>
+        <Wrapper isDarkMode={isDarkMode}>
           <Navbar />
           <Routes>
             <Route path="/" element={<MainPage />}></Route>
           </Routes>
         </Wrapper>
       </Router>
-    </DarkModeContextProvider>
   );
 }
 

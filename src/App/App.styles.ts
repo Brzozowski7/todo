@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { pallete } from "../misc/pallete";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ isDarkMode: boolean }>`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  width:100vw;
+  background-color: ${(props) =>
+    props.isDarkMode ? pallete.DarkGray : pallete.AlmostWhite};
 `;

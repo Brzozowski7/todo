@@ -15,6 +15,7 @@ export default function useDbData() {
       setTodos(
         snapshot.docs.map((doc) => ({
           task: doc.data().Task,
+          user: doc.data().User,
           id: doc.id,
         }))
       );
