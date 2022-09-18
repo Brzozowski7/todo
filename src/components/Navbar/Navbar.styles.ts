@@ -17,21 +17,10 @@ export const Wrapper = styled.header<{ isDarkMode: boolean }>`
       ? `1px solid ${pallete.TransparentWhite}`
       : `1px solid ${pallete.TransparentBlack}`};
   padding: 0 2rem;
-`;
-
-export const AuthOptions = styled.nav`
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  @media screen and (max-width: 960px) {
-    display: none;
-  }
-`;
-
-export const MenuIconContainer = styled.div`
-  display: none;
-  @media screen and (max-width: 960px) {
-    display: inline-block;
+  @media screen and (max-width: 900px) {
+    h1 {
+      font-size: 1rem;
+    }
   }
 `;
 
