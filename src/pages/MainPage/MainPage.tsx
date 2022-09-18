@@ -1,23 +1,17 @@
-import { useState, useEffect } from "react";
-import { collection, getDocs, DocumentData } from "firebase/firestore/lite";
-import db from "../../misc/firebase";
+import { useContext } from "react";
+import useDbData from "./useDbData";
+import { MainPageWrapper } from "./MainPage.styles";
+import Todo from "../../components/Todo/Todo";
+import { DarkModeContext } from "../../contexts/DarkModeContext";
 
 export default function MainPage() {
-  const [todos, setTodos] = useState<DocumentData[]>();
-
-  const getTodos = async () => {
-    const todosCollection = collection(db, "todos");
-    const todosSnapshot = await getDocs(todosCollection);
-    setTodos(todosSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-  useEffect(() => {
-    getTodos();
-  }, []);
+  const todos = useDbData();
+  const { isDarkMode } = useContext(DarkModeContext);
   return (
-    <div>
+    <MainPageWrapper isDarkMode={isDarkMode}>
       {todos?.map((todo) => {
-        return <div key={todo.id}>{todo.User}</div>;
+        return <Todo key={todo.id} todo={todo} />;
       })}
-    </div>
+    </MainPageWrapper>
   );
 }
