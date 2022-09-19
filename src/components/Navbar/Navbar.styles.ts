@@ -25,11 +25,22 @@ export const Wrapper = styled.header<{ isDarkMode: boolean }>`
 `;
 
 export const DarkModeIconContainer = styled.div<{ isDarkMode: boolean }>`
+  width: 33%;
+  display: flex;
+  justify-content: flex-end;
   padding: 0.2rem 0.5rem;
   border-radius: 0.5rem;
-  &:hover {
-    cursor: pointer;
-    background-color: ${(props) =>
-      props.isDarkMode ? pallete.TransparentWhite : pallete.TransparentBlack};
+  svg {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    &:hover {
+      cursor: pointer;
+      background-color: ${(props) =>
+        props.isDarkMode ? pallete.TransparentWhite : pallete.TransparentBlack};
+    }
   }
+`;
+
+export const Logo = styled.h1`
+  width: 33%;
 `;

@@ -1,9 +1,26 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DocumentData } from "firebase/firestore/lite";
-import { TodoWrapper } from "./Todo.styles";
+import { TodoWrapper, TipContainer } from "./Todo.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
 
-export default function Todo({ todo }: DocumentData) {
+interface TodoProps {
+  todo: DocumentData;
+  rotation: number;
+}
+
+export default function Todo({ todo, rotation }: TodoProps) {
   const { isDarkMode } = useContext(DarkModeContext);
-  return <TodoWrapper isDarkMode={isDarkMode}><h2>{todo.task}</h2>Added By: {todo.user}</TodoWrapper>;
+  const [isHovering, setIsHovering] = useState(false);
+  return (
+    <TodoWrapper
+      onMouseOver={() => setIsHovering(true)}
+      onMouseOut={() => setIsHovering(false)}
+      isDarkMode={isDarkMode}
+      rotation={rotation}
+    >
+      <h2>{todo.task}</h2>
+      <p>- {todo.user}</p>
+      <TipContainer>{isHovering && "Click to see details"}</TipContainer>
+    </TodoWrapper>
+  );
 }

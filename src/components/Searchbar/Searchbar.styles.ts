@@ -8,6 +8,7 @@ interface SearchbarProps {
 
 export const SearchbarContainer = styled.div<SearchbarProps>`
   display: flex;
+  width: 33%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
