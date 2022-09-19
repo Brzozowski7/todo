@@ -2,7 +2,12 @@ import { useContext, Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import { Wrapper } from "./AddTodo.styles";
+import {
+  Wrapper,
+  IconContainer,
+  CheckBoxContainer,
+  StyledBtn,
+} from "./AddTodo.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
 import { variants } from "./AddTodo.const";
 
@@ -22,7 +27,26 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
       variants={variants}
       transition={{ duration: 1 }}
     >
-      <FontAwesomeIcon onClick={() => setActive(false)} icon={faX} size="xl" />
+      <IconContainer>
+        <FontAwesomeIcon
+          onClick={() => setActive(false)}
+          icon={faX}
+          size="xl"
+        />
+      </IconContainer>
+      <label htmlFor="task">Task</label>
+      <input type="text" id="task" />
+      <label htmlFor="description">Description (optional)</label>
+      <textarea id="description" />
+      <label htmlFor="name">Name</label>
+      <input type="text" id="name" />
+      <label htmlFor="deadline">Deadline</label>
+      <input type="date" id="deadline" />
+      <CheckBoxContainer>
+        <input type="checkbox" id="urgent" />
+        <label htmlFor="urgent">Urgent</label>
+      </CheckBoxContainer>
+      <StyledBtn isDarkMode={isDarkMode}>Add Todo</StyledBtn>
     </Wrapper>
   );
 }

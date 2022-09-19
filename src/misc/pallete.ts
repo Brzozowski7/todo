@@ -7,4 +7,6 @@ export const pallete = {
   VeryLightGray: "hsla(0,0%,95%,1)",
   Black: "hsla(0,0%,0%,1)",
   TransparentBlack: "hsla(0,0%,0%,0.1)",
+  Red: "hsla(0,100%,50%,1)",
+  DarkRed: "hsla(0,100%,35%,1)",
 };

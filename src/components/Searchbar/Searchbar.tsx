@@ -14,7 +14,7 @@ export default function Searchbar() {
         icon={faSearch}
         onClick={() => setActive((prev) => !prev)}
       />
-      <SearchbarInput type="text" isDarkMode={isDarkMode} active={active} />
+      <SearchbarInput type="text" isDarkMode={isDarkMode} active={active} placeholder="Search by task or name..."/>
     </SearchbarContainer>
   );
 }

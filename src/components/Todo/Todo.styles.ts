@@ -4,20 +4,26 @@ import { pallete } from "../../misc/pallete";
 export const TodoWrapper = styled.div<{
   isDarkMode: boolean;
   rotation: number;
+  urgent: boolean;
 }>`
   font-family: "Indie Flower", cursive;
-  width: 400px;
+  width: 100%;
   min-height: 200px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.5) inset;
-  padding: 3rem 0 0 0;
+  padding: 3rem 2rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   transform: rotate(${(props) => props.rotation}deg);
-  transition: 2s ease-in-out;
   background-color: ${(props) =>
-    props.isDarkMode ? pallete.VeryDarkGray : pallete.VeryLightGray};
+    props.isDarkMode && props.urgent
+      ? pallete.DarkRed
+      : !props.isDarkMode && props.urgent
+      ? pallete.Red
+      : props.isDarkMode && !props.urgent
+      ? pallete.VeryDarkGray
+      : pallete.VeryLightGray};
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
   &:hover {
     cursor: pointer;
@@ -32,4 +38,13 @@ export const TodoWrapper = styled.div<{
 
 export const TipContainer = styled.div`
   height: 1.2rem;
+`;
+
+export const IconsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  svg {
+    padding: 1rem;
+  }
 `;
