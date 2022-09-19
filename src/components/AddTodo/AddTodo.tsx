@@ -11,7 +11,7 @@ import {
 } from "./AddTodo.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
 import { variants } from "./AddTodo.const";
-import db from "../../misc/firebase";
+import db from "../../backend/firebase"
 
 interface AddTodoProps {
   active: boolean;

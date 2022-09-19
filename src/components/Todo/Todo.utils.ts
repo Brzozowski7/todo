@@ -1,5 +1,5 @@
 import { updateDoc, deleteDoc, doc } from "firebase/firestore";
-import db from "../../misc/firebase";
+import db from "../../backend/firebase";
 
 export const deleteTodo = async (id: string) => {
   await deleteDoc(doc(db, "/todos", id));

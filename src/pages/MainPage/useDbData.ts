@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { collection, DocumentData, onSnapshot } from "firebase/firestore";
-import db from "../../misc/firebase";
+import db from "../../backend/firebase";
 
 export default function useDbData() {
   const [todos, setTodos] = useState<DocumentData[]>();
