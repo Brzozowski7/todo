@@ -9,4 +9,6 @@ export const pallete = {
   TransparentBlack: "hsla(0,0%,0%,0.1)",
   Red: "hsla(0,100%,50%,1)",
   DarkRed: "hsla(0,100%,35%,1)",
+  Green: "hsl(120,100%,50%,1)",
+  DarkGreen: "hsl(120,100%,30%,1)",
 };

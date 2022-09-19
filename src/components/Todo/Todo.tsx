@@ -1,9 +1,15 @@
 import { useContext, useState } from "react";
-import { DocumentData } from "firebase/firestore/lite";
+import { DocumentData } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faExclamation } from "@fortawesome/free-solid-svg-icons";
-import { TodoWrapper, TipContainer, IconsContainer } from "./Todo.styles";
+import { faCheck, faExclamation, faX } from "@fortawesome/free-solid-svg-icons";
+import {
+  TodoWrapper,
+  TipContainer,
+  IconsContainer,
+  BasicTaskInfo,
+} from "./Todo.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { deleteTodo, markAsComplete, markAsUrgent } from "./Todo.utils";
 
 interface TodoProps {
   todo: DocumentData;
@@ -13,31 +19,46 @@ interface TodoProps {
 export default function Todo({ todo, rotation }: TodoProps) {
   const { isDarkMode } = useContext(DarkModeContext);
   const [isHovering, setIsHovering] = useState(false);
-  const [urgent, setUrgent] = useState(false);
+
   return (
     <TodoWrapper
-      onMouseOver={() => setIsHovering(true)}
-      onMouseOut={() => setIsHovering(false)}
       isDarkMode={isDarkMode}
       rotation={rotation}
-      urgent={urgent}
+      urgent={todo.urgent}
+      completed={todo.completed}
     >
-      <h2>{todo.task}</h2>
-      <p>- {todo.user}</p>
-      <TipContainer>{isHovering && "Click to see details"}</TipContainer>
+      <BasicTaskInfo
+        onMouseOver={() => setIsHovering(true)}
+        onMouseOut={() => setIsHovering(false)}
+      >
+        <h2>{todo.task}</h2>
+        <p>- {todo.name}</p>
+        <TipContainer>{isHovering && "Click to see details"}</TipContainer>
+      </BasicTaskInfo>
       <IconsContainer>
         <FontAwesomeIcon
+          onClick={() => markAsComplete(todo.completed, todo.id)}
           icon={faCheck}
           size="xl"
-          title="Click to mark as done"
+          title={
+            todo.completed
+              ? "Click to mark as thing to do"
+              : "Click to mark as done"
+          }
         />
         <FontAwesomeIcon
+          onClick={() => deleteTodo(todo.id)}
+          icon={faX}
+          size="xl"
+          title="Click to remove task"
+        />
+        <FontAwesomeIcon
+          onClick={() => markAsUrgent(todo.urgent, todo.id)}
           icon={faExclamation}
           size="xl"
           title={
-            urgent ? "Click to remove priority" : "Click to mark as urgent"
+            todo.urgent ? "Click to remove priority" : "Click to mark as urgent"
           }
-          onClick={() => setUrgent((prev) => !prev)}
         />
       </IconsContainer>
     </TodoWrapper>

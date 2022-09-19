@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  collection,
-  DocumentData,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, DocumentData, onSnapshot } from "firebase/firestore";
 import db from "../../misc/firebase";
 
 export default function useDbData() {
@@ -13,8 +9,10 @@ export default function useDbData() {
     const unsubscribe = onSnapshot(collection(db, "todos"), (snapshot) => {
       setTodos(
         snapshot.docs.map((doc) => ({
-          task: doc.data().Task,
-          user: doc.data().User,
+          task: doc.data().task,
+          name: doc.data().name,
+          completed: doc.data().completed,
+          urgent: doc.data().urgent,
           id: doc.id,
         }))
       );
