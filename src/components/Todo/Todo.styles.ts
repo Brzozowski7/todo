@@ -9,7 +9,7 @@ export const TodoWrapper = styled.div<{
 }>`
   font-family: "Indie Flower", cursive;
   width: 400px;
-  min-height: 200px;
+  height: 200px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.5) inset;
   padding: 3rem 2rem 0;
   display: flex;

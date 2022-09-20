@@ -3,7 +3,6 @@ import { pallete } from "../../misc/pallete";
 
 export const MainPageWrapper = styled.main<{ isDarkMode: boolean }>`
   height: 100%;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,6 +20,7 @@ export const TodosWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 3rem;

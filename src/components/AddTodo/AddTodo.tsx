@@ -1,45 +1,51 @@
-import { useState, useContext, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  ChangeEvent,
+} from "react";
 import { motion } from "framer-motion";
-import { collection, addDoc } from "firebase/firestore";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import {
   Wrapper,
   IconContainer,
-  CheckBoxContainer,
   StyledBtn,
+  StyledLabelAndInput,
+  ErrorMessageContainer,
 } from "./AddTodo.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
-import { variants } from "./AddTodo.const";
-import db from "../../backend/firebase"
+import { variants, today } from "./AddTodo.const";
+import { todoInputs } from "../../misc/todoInputs";
+import useAddTodoToDb from "./useAddTodoToDb";
 
 interface AddTodoProps {
   active: boolean;
   setActive: Dispatch<SetStateAction<boolean>>;
 }
-interface ITodoDetails {
-  task: string;
-  description: string;
-  name: string;
-  deadline: string;
-  urgent: string;
-}
 
 export default function AddTodo({ active, setActive }: AddTodoProps) {
   const { isDarkMode } = useContext(DarkModeContext);
-  const [checked, setChecked] = useState(false);
-  const [todoDetails, setTodoDetails] = useState({} as ITodoDetails);
+  const [todoDetails, setTodoDetails] = useState({
+    task: "",
+    description: "",
+    name: "",
+    deadline: "",
+    urgent: "",
+  });
+  const { submitTodo, loading, errors } = useAddTodoToDb(todoDetails);
 
-  const handleSubmit = async () => {
-    await addDoc(collection(db, "/todos"), {
-      task: todoDetails.task,
-      description: todoDetails.description,
-      name: todoDetails.name,
-      deadline: todoDetails.deadline,
-      urgent: checked,
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTodoDetails((prev) => {
+      return {
+        ...prev,
+        [e.target.id]: e.target.value,
+      };
     });
   };
-  
+
   return (
     <Wrapper
       isDarkMode={isDarkMode}
@@ -56,21 +62,27 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
           size="xl"
         />
       </IconContainer>
-      <label htmlFor="task">Task</label>
-      <input
-        type="text"
-        id="task"
-        onChange={(e) =>
-          setTodoDetails((prev) => {
-            return {
-              ...prev,
-              task: e.target.value,
-            };
-          })
-        }
-      />
+      {todoInputs.map((item) => {
+        return (
+          <StyledLabelAndInput
+            isDarkMode={isDarkMode}
+            err={errors?.includes(item.id)}
+            key={item.id}
+          >
+            <label htmlFor={item.id}>{item.text}</label>
+            <input
+              value={todoDetails[item.id as keyof typeof todoDetails]}
+              type={item.type}
+              id={item.id}
+              min={today}
+              onChange={(e) => handleChange(e)}
+            />
+          </StyledLabelAndInput>
+        );
+      })}
       <label htmlFor="description">Description (optional)</label>
       <textarea
+        value={todoDetails.description}
         id="description"
         onChange={(e) =>
           setTodoDetails((prev) => {
@@ -81,43 +93,12 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
           })
         }
       />
-      <label htmlFor="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        onChange={(e) =>
-          setTodoDetails((prev) => {
-            return {
-              ...prev,
-              name: e.target.value,
-            };
-          })
-        }
-      />
-      <label htmlFor="deadline">Deadline</label>
-      <input
-        type="date"
-        id="deadline"
-        onChange={(e) =>
-          setTodoDetails((prev) => {
-            return {
-              ...prev,
-              deadline: e.target.value,
-            };
-          })
-        }
-      />
-      <CheckBoxContainer>
-        <input
-          type="checkbox"
-          id="urgent"
-          onChange={() => setChecked((prev) => !prev)}
-        />
-        <label htmlFor="urgent">Urgent</label>
-      </CheckBoxContainer>
-      <StyledBtn onClick={handleSubmit} isDarkMode={isDarkMode}>
-        Add Todo
+      <StyledBtn onClick={submitTodo} isDarkMode={isDarkMode}>
+        {loading ? "Adding Todo..." : "Add Todo"}
       </StyledBtn>
+      <ErrorMessageContainer isDarkMode={isDarkMode}>
+        {errors && "Please fill up required fields"}
+      </ErrorMessageContainer>
     </Wrapper>
   );
 }

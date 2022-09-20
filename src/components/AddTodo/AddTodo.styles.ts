@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { pallete } from "../../misc/pallete";
 
 export const Wrapper = styled.div<{ isDarkMode: boolean }>`
-  position: absolute;
-  top: -1px;
+  position: fixed;
   width: 30%;
+  top: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -13,16 +13,10 @@ export const Wrapper = styled.div<{ isDarkMode: boolean }>`
   background-color: ${(props) =>
     props.isDarkMode ? pallete.Black : pallete.VeryLightGray};
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
-  input {
-    background-color: ${(props) =>
-      props.isDarkMode ? pallete.DarkGray : pallete.VeryLightGray};
-    color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
-    padding: 0.5rem;
-    font-size: 1.2rem;
-  }
   textarea {
+    width: 100%;
     background-color: ${(props) =>
-      props.isDarkMode ? pallete.DarkGray : pallete.VeryLightGray};
+      props.isDarkMode ? pallete.DarkGray : pallete.White};
     color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
     padding: 0.5rem 1rem;
     font-size: 1.2rem;
@@ -42,14 +36,8 @@ export const IconContainer = styled.div`
     cursor: pointer;
   }
 `;
-
-export const CheckBoxContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-`;
-
 export const StyledBtn = styled.button<{ isDarkMode: boolean }>`
+  width: 100%;
   padding: 1rem;
   font-weight: 700;
   font-size: 1.3rem;
@@ -58,5 +46,33 @@ export const StyledBtn = styled.button<{ isDarkMode: boolean }>`
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
   &:hover {
     cursor: pointer;
+    background-color: ${(props) =>
+      props.isDarkMode ? pallete.VeryLightGray : pallete.VeryDarkGray};
+    color: ${(props) => (props.isDarkMode ? pallete.Black : pallete.White)};
+    transition: 0.2s ease-in-out;
   }
+`;
+
+export const StyledLabelAndInput = styled.div<{
+  isDarkMode: boolean;
+  err: boolean | undefined;
+}>`
+  input {
+    width: 100%;
+    border: ${(props) => (props.err ? `0.5px ${pallete.Red} solid` : "none")};
+    background-color: ${(props) =>
+      props.isDarkMode ? pallete.DarkGray : pallete.White};
+    color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
+    padding: 0.5rem;
+    font-size: 1.2rem;
+  }
+  input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    display: flex;
+  }
+`;
+export const ErrorMessageContainer = styled.div<{ isDarkMode: boolean }>`
+  height: 1.5rem;
+  color: ${(props) => (props.isDarkMode ? pallete.DarkRed : pallete.Red)};
 `;
