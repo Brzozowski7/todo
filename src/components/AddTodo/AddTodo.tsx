@@ -47,7 +47,7 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
     setTodoDetails((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.value || e.target.checked,
+        [e.target.id]: e.target.value,
       };
     });
   };

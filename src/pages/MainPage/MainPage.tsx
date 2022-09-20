@@ -5,8 +5,10 @@ import Todo from "../../components/Todo/Todo";
 import AddTodo from "../../components/AddTodo";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
 import { rotateTodo } from "./MainPage.utils";
-
-export default function MainPage() {
+interface MainPageProps {
+  search: string;
+}
+export default function MainPage({ search }: MainPageProps) {
   const [addTodoActive, setAddTodoActive] = useState(false);
   const todos = useDbData();
   const { isDarkMode } = useContext(DarkModeContext);
@@ -19,9 +21,16 @@ export default function MainPage() {
         +
       </AddTodoBtn>
       <TodosWrapper>
-        {todos?.map((todo) => {
-          return <Todo key={todo.id} todo={todo} rotation={rotateTodo()} />;
-        })}
+        {todos
+          ?.filter((todo) => {
+            return (
+              todo.name.toLowerCase().startsWith(search.toLowerCase()) ||
+              todo.task.toLowerCase().startsWith(search.toLowerCase())
+            );
+          })
+          .map((todo) => {
+            return <Todo key={todo.id} todo={todo} rotation={rotateTodo()} />;
+          })}
       </TodosWrapper>
       <AddTodo active={addTodoActive} setActive={setAddTodoActive} />
     </MainPageWrapper>

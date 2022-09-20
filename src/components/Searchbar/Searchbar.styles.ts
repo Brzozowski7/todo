@@ -43,6 +43,7 @@ export const SearchbarInput = styled.input<SearchbarProps>`
     outline: none;
   }
   @media screen and (max-width: 900px) {
+    font-size: 0.55rem;
     display: ${(props) => (props.active ? "inline-block" : "none")};
   }
 `;
