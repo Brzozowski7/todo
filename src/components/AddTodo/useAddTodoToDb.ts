@@ -12,11 +12,11 @@ interface ITodoDetails {
 
 const useAddTodoToDb = (todoDetails: ITodoDetails) => {
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<string[]>();
+  const [status, setStatus] = useState<string[] | string>();
 
   const submitTodo = async () => {
     if (checkTodo(todoDetails).length > 0) {
-      setErrors(checkTodo(todoDetails));
+      setStatus(checkTodo(todoDetails));
     } else {
       setLoading(true);
       try {
@@ -27,6 +27,7 @@ const useAddTodoToDb = (todoDetails: ITodoDetails) => {
           deadline: todoDetails.deadline,
           createdAt: Date.now(),
         });
+        setStatus("Succesfully added Todo")
       } catch (err) {
         console.log(err);
       } finally {
@@ -34,7 +35,7 @@ const useAddTodoToDb = (todoDetails: ITodoDetails) => {
       }
     }
   };
-  return { submitTodo, loading, errors };
+  return { submitTodo, loading, status };
 };
 
 export default useAddTodoToDb;

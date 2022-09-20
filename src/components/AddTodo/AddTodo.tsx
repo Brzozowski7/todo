@@ -1,6 +1,7 @@
 import {
   useState,
   useContext,
+  useEffect,
   Dispatch,
   SetStateAction,
   ChangeEvent,
@@ -21,6 +22,12 @@ import { variants, today } from "./AddTodo.const";
 import { todoInputs } from "../../misc/todoInputs";
 import useAddTodoToDb from "./useAddTodoToDb";
 
+interface ITodoDetails {
+  task: string;
+  description: string;
+  name: string;
+  deadline: string;
+}
 interface AddTodoProps {
   active: boolean;
   setActive: Dispatch<SetStateAction<boolean>>;
@@ -34,7 +41,7 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
     name: "",
     deadline: "",
   });
-  const { submitTodo, loading, errors } = useAddTodoToDb(todoDetails);
+  const { submitTodo, loading, status } = useAddTodoToDb(todoDetails);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTodoDetails((prev) => {
@@ -44,6 +51,15 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
       };
     });
   };
+  useEffect(() => {
+    if (typeof status == "string")
+      setTodoDetails({
+        task: "",
+        description: "",
+        name: "",
+        deadline: "",
+      });
+  }, [status]);
 
   return (
     <Wrapper
@@ -65,12 +81,12 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
         return (
           <StyledLabelAndInput
             isDarkMode={isDarkMode}
-            err={errors?.includes(item.id)}
+            err={status?.includes(item.id)}
             key={item.id}
           >
             <label htmlFor={item.id}>{item.text}</label>
             <input
-              value={todoDetails[item.id as keyof typeof todoDetails]}
+              value={todoDetails[item.id as keyof ITodoDetails]}
               type={item.type}
               id={item.id}
               min={today}
@@ -95,8 +111,13 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
       <StyledBtn onClick={submitTodo} isDarkMode={isDarkMode}>
         {loading ? "Adding Todo..." : "Add Todo"}
       </StyledBtn>
-      <ErrorMessageContainer isDarkMode={isDarkMode}>
-        {errors && "Please fill up required fields"}
+      <ErrorMessageContainer
+        err={typeof status === "object"}
+        isDarkMode={isDarkMode}
+      >
+        {typeof status === "object"
+          ? `Please fill up the rest of required fields: ${status.join(", ")}`
+          : status}
       </ErrorMessageContainer>
     </Wrapper>
   );

@@ -72,7 +72,15 @@ export const StyledLabelAndInput = styled.div<{
     display: flex;
   }
 `;
-export const ErrorMessageContainer = styled.div<{ isDarkMode: boolean }>`
+export const ErrorMessageContainer = styled.div<{
+  isDarkMode: boolean;
+  err: boolean;
+}>`
   height: 1.5rem;
-  color: ${(props) => (props.isDarkMode ? pallete.DarkRed : pallete.Red)};
+  color: ${(props) =>
+    props.isDarkMode && props.err
+      ? pallete.DarkRed
+      : !props.isDarkMode && props.err
+      ? pallete.Red
+      : pallete.DarkGreen};
 `;
