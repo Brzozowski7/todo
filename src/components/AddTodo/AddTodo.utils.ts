@@ -3,7 +3,6 @@ interface ITodoDetails {
   description: string;
   name: string;
   deadline: string;
-  urgent: string;
 }
 
 export const checkTodo = (todo: ITodoDetails) => {

@@ -17,12 +17,6 @@ const todoInputs = [
     name: "deadline",
     text: "Deadline",
   },
-  {
-    id: "urgent",
-    type: "checkbox",
-    name: "urgent",
-    text: "Urgent",
-  },
 ];
 
 export { todoInputs };

@@ -8,7 +8,6 @@ interface ITodoDetails {
   description: string;
   name: string;
   deadline: string;
-  urgent: string;
 }
 
 const useAddTodoToDb = (todoDetails: ITodoDetails) => {
@@ -26,7 +25,6 @@ const useAddTodoToDb = (todoDetails: ITodoDetails) => {
           description: todoDetails.description || "",
           name: todoDetails.name,
           deadline: todoDetails.deadline,
-          urgent: todoDetails.urgent === "on" ? true : false,
           createdAt: Date.now(),
         });
       } catch (err) {

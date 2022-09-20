@@ -33,7 +33,6 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
     description: "",
     name: "",
     deadline: "",
-    urgent: "",
   });
   const { submitTodo, loading, errors } = useAddTodoToDb(todoDetails);
 
@@ -41,7 +40,7 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
     setTodoDetails((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.value,
+        [e.target.id]: e.target.value || e.target.checked,
       };
     });
   };
