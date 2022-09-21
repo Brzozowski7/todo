@@ -24,10 +24,12 @@ const useAddTodoToDb = (todoDetails: ITodoDetails) => {
           task: todoDetails.task,
           description: todoDetails.description || "",
           name: todoDetails.name,
-          deadline: todoDetails.deadline,
-          createdAt: Date.now(),
+          deadline: new Date(todoDetails.deadline),
+          createdAt: new Date(),
+          completed: false,
+          urgent: false,
         });
-        setStatus("Succesfully added Todo")
+        setStatus("Succesfully added Todo");
       } catch (err) {
         console.log(err);
       } finally {

@@ -13,21 +13,22 @@ import { deleteTodo, markAsComplete, markAsUrgent } from "./Todo.utils";
 
 interface TodoProps {
   todo: DocumentData;
-  rotation: number;
 }
 
-export default function Todo({ todo, rotation }: TodoProps) {
+export default function Todo({ todo}: TodoProps) {
   const { isDarkMode } = useContext(DarkModeContext);
   const [isHovering, setIsHovering] = useState(false);
 
   return (
     <TodoWrapper
       isDarkMode={isDarkMode}
-      rotation={rotation}
+
       urgent={todo.urgent}
       completed={todo.completed}
     >
       <BasicTaskInfo
+        to={"/" + todo.id}
+        isDarkMode={isDarkMode}
         onMouseOver={() => setIsHovering(true)}
         onMouseOut={() => setIsHovering(false)}
       >

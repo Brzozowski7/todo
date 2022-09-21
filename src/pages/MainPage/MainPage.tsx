@@ -29,7 +29,7 @@ export default function MainPage({ search }: MainPageProps) {
             );
           })
           .map((todo) => {
-            return <Todo key={todo.id} todo={todo} rotation={rotateTodo()} />;
+            return <Todo key={todo.id} todo={todo} />;
           })}
       </TodosWrapper>
       <AddTodo active={addTodoActive} setActive={setAddTodoActive} />
