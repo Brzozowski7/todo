@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage search={search} />}></Route>
             <Route path="/todo/:todoID" element={<TodoPage />}></Route>
-            <Route path="/user/:user" element={<UserTodos />}></Route>
+            <Route path="/user/:user" element={<UserTodos search={search} />}></Route>
           </Routes>
         </Wrapper>
       </Router>

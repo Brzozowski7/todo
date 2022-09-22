@@ -5,7 +5,11 @@ import { UsersTodosPageWrapper, TodosWrapper } from "./UserTodos.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
 import Todo from "../../components/Todo";
 
-export default function UserTodos() {
+interface UserTodoProps {
+  search: string;
+}
+
+export default function UserTodos({ search }: UserTodoProps) {
   const { isDarkMode } = useContext(DarkModeContext);
   const { user } = useParams();
   const userTodos = useGetUserTodos(user!);
@@ -13,9 +17,15 @@ export default function UserTodos() {
     <UsersTodosPageWrapper isDarkMode={isDarkMode}>
       <h1>All Todos of {user}</h1>
       <TodosWrapper>
-        {userTodos.map((item) => {
-          return <Todo key={item.id} todo={item} />;
-        })}
+        {userTodos
+          .filter((todo) => {
+            return (
+              todo.task.toLowerCase().startsWith(search.toLowerCase())
+            );
+          })
+          .map((item) => {
+            return <Todo key={item.id} todo={item} />;
+          })}
       </TodosWrapper>
     </UsersTodosPageWrapper>
   );
