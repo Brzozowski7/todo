@@ -90,6 +90,7 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
             <input
               value={todoDetails[item.id as keyof ITodoDetails]}
               type={item.type}
+              name={item.name}
               id={item.id}
               min={today}
               onChange={(e) => handleChange(e)}
