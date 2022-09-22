@@ -7,12 +7,13 @@ const useGetTodoDetails = (id: string) => {
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "todos", id), (doc) => {
+      console.log(doc.data()!.createdAt)
       setTodo({
         task: doc.data()!.task,
         name: doc.data()!.name,
         description: doc.data()!.description,
-        deadline: doc.data()!.deadline.toDate().toDateString(),
-        createdAt: doc.data()!.createdAt.toDate().toDateString(),
+        deadline: (doc.data()!.deadline.seconds)*1000,
+        createdAt: (doc.data()!.createdAt.seconds)*1000,
         completed: doc.data()!.completed,
         urgent: doc.data()!.urgent,
       });

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { FormattedMessage, FormattedDate } from "react-intl";
 import {
   TodoPageWrapper,
   TodoDetailsWrapper,
@@ -13,6 +14,7 @@ export default function TodoPage() {
   const { isDarkMode } = useContext(DarkModeContext);
   const { todoID } = useParams();
   const todo = useGetTodoDetails(todoID!);
+  const { days, hours } = calculateTimeLeft(todo?.deadline);
 
   return (
     <TodoPageWrapper>
@@ -23,16 +25,69 @@ export default function TodoPage() {
           isDarkMode={isDarkMode}
         >
           <h1>{todo.task}</h1>
-          <p>{todo.description}</p>
-          <p>Added by: {todo.name}</p>
+          <p>
+            <FormattedMessage
+              id="TodoPageDescription"
+              defaultMessage="Description"
+            />
+            : {todo.description}
+          </p>
+          <p>
+            <FormattedMessage id="TodoPageAddedBy" defaultMessage="Added By" />:{" "}
+            {todo.name}
+          </p>
           <StyledLink to={"/user/" + todo?.name} isDarkMode={isDarkMode}>
-            Click to go to all {todo.name}'s tasks
+            <FormattedMessage id="AllTodosLink" defaultMessage="All Todos of" />{" "}
+            {todo.name}
           </StyledLink>
-          <p>Created: {todo.createdAt}</p>
-          <p>Deadline: {todo.deadline}</p>
-          <p>Time left: {calculateTimeLeft(todo?.deadline)}</p>
-          <p>Urgent: {todo.urgent ? "Yes" : "No"}</p>
-          <p>Completed: {todo.completed ? "Yes" : "No"}</p>
+          <p>
+            <FormattedMessage id="TodoPageCreated" defaultMessage="Created" />:{" "}
+            <FormattedDate
+              value={new Date(todo.createdAt)}
+              year="numeric"
+              month="long"
+              day="2-digit"
+            />
+          </p>
+          <p>
+            <FormattedMessage id="TodoPageDeadline" defaultMessage="Deadline" />
+            :{" "}
+            <FormattedDate
+              value={new Date(todo.deadline)}
+              year="numeric"
+              month="long"
+              day="2-digit"
+            />
+          </p>
+          <p>
+            <FormattedMessage
+              id="TodoPageTimeLeft"
+              defaultMessage="Time left"
+            />
+            : {days}{" "}
+            <FormattedMessage id="TodoPageDays" defaultMessage="days" /> {hours}{" "}
+            <FormattedMessage id="TodoPageHours" defaultMessage="hours" />
+          </p>
+          <p>
+            <FormattedMessage id="TodoPageUrgent" defaultMessage="Urgent" />:{" "}
+            {todo.urgent ? (
+              <FormattedMessage id="Yes" defaultMessage="Yes" />
+            ) : (
+              <FormattedMessage id="No" defaultMessage="No" />
+            )}
+          </p>
+          <p>
+            <FormattedMessage
+              id="TodoPageCompleted"
+              defaultMessage="Completed"
+            />
+            :{" "}
+            {todo.completed ? (
+              <FormattedMessage id="Yes" defaultMessage="Yes" />
+            ) : (
+              <FormattedMessage id="No" defaultMessage="No" />
+            )}
+          </p>
         </TodoDetailsWrapper>
       )}
     </TodoPageWrapper>

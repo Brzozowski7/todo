@@ -28,7 +28,7 @@ const useGetUserTodos = (name: string) => {
     return () => {
       unsub();
     };
-  }, [name]);
+  }, [q]);
 
   return userTodos;
 };

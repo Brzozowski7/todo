@@ -1,18 +1,18 @@
 const todoInputs = [
   {
-    id: "task",
+    id: "AddTodoTask",
     type: "text",
     name: "task",
     text: "Task",
   },
   {
-    id: "name",
+    id: "AddTodoName",
     type: "name",
     name: "name",
     text: "Name",
   },
   {
-    id: "deadline",
+    id: "AddTodoDeadline",
     type: "date",
     name: "deadline",
     text: "Deadline",

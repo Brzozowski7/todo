@@ -7,7 +7,7 @@ import {
   ChangeEvent,
 } from "react";
 import { motion } from "framer-motion";
-
+import { FormattedMessage } from "react-intl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -47,7 +47,7 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
     setTodoDetails((prev) => {
       return {
         ...prev,
-        [e.target.id]: e.target.value,
+        [e.target.name]: e.target.value,
       };
     });
   };
@@ -81,10 +81,12 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
         return (
           <StyledLabelAndInput
             isDarkMode={isDarkMode}
-            err={status?.includes(item.id)}
+            err={status?.includes(item.name)}
             key={item.id}
           >
-            <label htmlFor={item.id}>{item.text}</label>
+            <label htmlFor={item.id}>
+              <FormattedMessage id={item.id} defaultMessage={item.text} />
+            </label>
             <input
               value={todoDetails[item.id as keyof ITodoDetails]}
               type={item.type}
@@ -95,7 +97,12 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
           </StyledLabelAndInput>
         );
       })}
-      <label htmlFor="description">Description (optional)</label>
+      <label htmlFor="description">
+        <FormattedMessage
+          id="AddTodoDescription"
+          defaultMessage="Description (optional)"
+        />
+      </label>
       <textarea
         value={todoDetails.description}
         id="description"
@@ -109,15 +116,32 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
         }
       />
       <StyledBtn onClick={submitTodo} isDarkMode={isDarkMode}>
-        {loading ? "Adding Todo..." : "Add Todo"}
+        {loading ? (
+          <FormattedMessage
+            id="AddTodoLoadingBtn"
+            defaultMessage="Adding Todo..."
+          />
+        ) : (
+          <FormattedMessage id="AddTodoBtn" defaultMessage="Add Todo" />
+        )}
       </StyledBtn>
       <ErrorMessageContainer
         err={typeof status === "object"}
         isDarkMode={isDarkMode}
       >
-        {typeof status === "object"
-          ? `Please fill up the rest of required fields: ${status.join(", ")}`
-          : status}
+        {typeof status === "object" ? (
+          <FormattedMessage
+            id="AddTodoFieldsToFillUp"
+            defaultMessage="Please fill up the rest of required fields"
+          />
+        ) : typeof status === "string" ? (
+          <FormattedMessage
+            id="AddTodoSuccess"
+            defaultMessage="Successfully added Todo"
+          />
+        ) : (
+          ""
+        )}
       </ErrorMessageContainer>
     </Wrapper>
   );

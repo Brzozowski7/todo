@@ -29,7 +29,7 @@ const useAddTodoToDb = (todoDetails: ITodoDetails) => {
           completed: false,
           urgent: false,
         });
-        setStatus("Succesfully added Todo");
+        setStatus("Success");
       } catch (err) {
         console.log(err);
       } finally {

@@ -25,10 +25,14 @@ export const Wrapper = styled.header<{ isDarkMode: boolean }>`
   }
 `;
 
-export const DarkModeIconContainer = styled.div<{ isDarkMode: boolean }>`
+export const DarkModeIconAndLanguageContainer = styled.div<{
+  isDarkMode: boolean;
+}>`
   width: 33%;
   display: flex;
+  gap: 0.5rem;
   justify-content: flex-end;
+  align-items: center;
   padding: 0.2rem 0.5rem;
   border-radius: 0.5rem;
   svg {
@@ -41,14 +45,28 @@ export const DarkModeIconContainer = styled.div<{ isDarkMode: boolean }>`
     }
   }
 `;
-
+export const LogoContainer = styled.div`
+  width: 33%;
+`;
 export const Logo = styled(Link)<{ isDarkMode: boolean }>`
   text-decoration: none;
-  width: 33%;
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
   font-size: 2rem;
   font-weight: 700;
   @media screen and (max-width: 900px) {
-      font-size: 1rem;
+    font-size: 1rem;
+  }
+`;
+
+export const LanguagesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  img {
+    height: 1rem;
+    border-radius: 0.2rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
