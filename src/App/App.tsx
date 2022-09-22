@@ -5,6 +5,7 @@ import { Wrapper } from "./App.styles";
 import MainPage from "../pages/MainPage";
 import { DarkModeContext } from "../contexts/DarkModeContext";
 import TodoPage from "../pages/TodoPage/TodoPage";
+import UserTodos from "../pages/UserTodos/UserTodos";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -15,7 +16,8 @@ function App() {
         <Navbar setSearch={setSearch} search={search} />
         <Routes>
           <Route path="/" element={<MainPage search={search} />}></Route>
-          <Route path="/:todoID" element={<TodoPage />}></Route>
+          <Route path="/todo/:todoID" element={<TodoPage />}></Route>
+          <Route path="/user/:user" element={<UserTodos />}></Route>
         </Routes>
       </Wrapper>
     </Router>

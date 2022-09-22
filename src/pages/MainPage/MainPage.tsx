@@ -4,7 +4,7 @@ import { MainPageWrapper, AddTodoBtn, TodosWrapper } from "./MainPage.styles";
 import Todo from "../../components/Todo/Todo";
 import AddTodo from "../../components/AddTodo";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
-import { rotateTodo } from "./MainPage.utils";
+
 interface MainPageProps {
   search: string;
 }

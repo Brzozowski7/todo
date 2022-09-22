@@ -27,13 +27,13 @@ export default function Todo({ todo}: TodoProps) {
       completed={todo.completed}
     >
       <BasicTaskInfo
-        to={"/" + todo.id}
+        to={"/todo/" + todo.id}
         isDarkMode={isDarkMode}
         onMouseOver={() => setIsHovering(true)}
         onMouseOut={() => setIsHovering(false)}
       >
         <h2>{todo.task}</h2>
-        <p>- {todo.name}</p>
+        <p> {todo?.name}</p>
         <TipContainer>{isHovering && "Click to see details"}</TipContainer>
       </BasicTaskInfo>
       <IconsContainer>

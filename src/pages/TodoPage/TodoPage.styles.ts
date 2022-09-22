@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { pallete } from "../../misc/pallete";
 
@@ -14,6 +15,7 @@ export const TodoDetailsWrapper = styled.div<{
   urgent: boolean;
   completed: boolean;
 }>`
+  position: relative;
   font-family: "Indie Flower", cursive;
   width: 400px;
   height: 600px;
@@ -23,7 +25,7 @@ export const TodoDetailsWrapper = styled.div<{
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  text-align:center;
+  text-align: center;
   background-color: ${(props) =>
     props.isDarkMode && props.completed
       ? pallete.DarkGreen
@@ -36,5 +38,12 @@ export const TodoDetailsWrapper = styled.div<{
       : props.isDarkMode && !props.urgent && !props.completed
       ? pallete.VeryDarkGray
       : pallete.VeryLightGray};
+  color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
+  @media screen and (max-width: 900px) {
+    height: 100%;
+    width: 100%;
+  }
+`;
+export const StyledLink = styled(Link)<{isDarkMode:boolean}>`
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
 `;

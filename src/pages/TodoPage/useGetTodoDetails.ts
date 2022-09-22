@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { onSnapshot, DocumentData, doc,  } from "firebase/firestore";
+import { onSnapshot, DocumentData, doc } from "firebase/firestore";
 import db from "../../backend/firebase";
 
 const useGetTodoDetails = (id: string) => {

@@ -31,8 +31,6 @@ export const TodoWrapper = styled.div<{
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
   &:hover {
     cursor: pointer;
-    scale: 1.05;
-    transition: 0.5s ease-in-out;
   }
   @media screen and (max-width: 900px) {
     transition: none;

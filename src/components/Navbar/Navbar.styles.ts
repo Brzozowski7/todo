@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { pallete } from "../../misc/pallete";
 
@@ -41,6 +42,13 @@ export const DarkModeIconContainer = styled.div<{ isDarkMode: boolean }>`
   }
 `;
 
-export const Logo = styled.h1`
+export const Logo = styled(Link)<{ isDarkMode: boolean }>`
+  text-decoration: none;
   width: 33%;
+  color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
+  font-size: 2rem;
+  font-weight: 700;
+  @media screen and (max-width: 900px) {
+      font-size: 1rem;
+  }
 `;
