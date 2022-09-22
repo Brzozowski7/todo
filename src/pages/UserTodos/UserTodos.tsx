@@ -16,13 +16,14 @@ export default function UserTodos({ search }: UserTodoProps) {
   const userTodos = useGetUserTodos(user!);
   return (
     <UsersTodosPageWrapper isDarkMode={isDarkMode}>
-      <FormattedMessage id="UsersTodoAllOf" defaultMessage="All Todos of"/> {user}
+      <h1>
+        <FormattedMessage id="UsersTodoAllOf" defaultMessage="All Todos of" />{" "}
+        {user}
+      </h1>
       <TodosWrapper>
         {userTodos
           .filter((todo) => {
-            return (
-              todo.task.toLowerCase().startsWith(search.toLowerCase())
-            );
+            return todo.task.toLowerCase().startsWith(search.toLowerCase());
           })
           .map((item) => {
             return <Todo key={item.id} todo={item} />;
