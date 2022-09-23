@@ -14,7 +14,7 @@ describe("time difference calculating function", () => {
       futureDate: (Date.now() - 36001000).toString(),
       expected: { days: -0, hours: -10 },
     },
-  ])("checking if correct color is returned", ({ futureDate, expected }) => {
+  ])("checking if correct time difference is returned", ({ futureDate, expected }) => {
     expect(calculateTimeLeft(futureDate)).toStrictEqual(expected);
   });
 });
