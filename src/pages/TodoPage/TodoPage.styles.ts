@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { pallete } from "../../misc/pallete";
 import guessTodoColor from "../../utils/guessTodoColor";
 
-export const TodoPageWrapper = styled.div`
+export const TodoPageWrapper = styled.div<{ isDarkMode: boolean }>`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) =>
+    props.isDarkMode ? pallete.DarkGray : pallete.AlmostWhite};
 `;
 
 export const TodoDetailsWrapper = styled.div<{

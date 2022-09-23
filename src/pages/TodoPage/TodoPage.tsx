@@ -17,7 +17,7 @@ export default function TodoPage() {
   const { days, hours } = calculateTimeLeft(todo?.deadline);
 
   return (
-    <TodoPageWrapper>
+    <TodoPageWrapper isDarkMode={isDarkMode}>
       {todo && (
         <TodoDetailsWrapper
           completed={todo.completed}
