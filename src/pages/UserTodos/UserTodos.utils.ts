@@ -1,4 +1,4 @@
-export const filterByName = (
+export const filterByTask = (
   task: string,
   search: string
 ) => {

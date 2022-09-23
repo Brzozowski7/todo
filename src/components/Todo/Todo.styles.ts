@@ -9,8 +9,8 @@ export const TodoWrapper = styled.div<{
   completed: boolean;
 }>`
   font-family: "Indie Flower", cursive;
-  width: 400px;
-  height: 200px;
+  width: 25%;
+  height: 100%;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.5) inset;
   padding: 3rem 2rem 0;
   display: flex;
@@ -26,6 +26,7 @@ export const TodoWrapper = styled.div<{
   @media screen and (max-width: 900px) {
     transition: none;
     width: 100%;
+    height:50%;
   }
 `;
 

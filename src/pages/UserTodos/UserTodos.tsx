@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import useGetUserTodos from "./useGetUserTodos";
 import { UsersTodosPageWrapper, TodosWrapper } from "./UserTodos.styles";
-import { filterByName } from "./UserTodos.utils";
+import { filterByTask } from "./UserTodos.utils";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
 import Todo from "../../components/Todo";
 
@@ -23,7 +23,7 @@ export default function UserTodos({ search }: UserTodoProps) {
       </h1>
       <TodosWrapper>
         {userTodos
-          .filter((todo) => filterByName(todo.name, search))
+          .filter((todo) => filterByTask(todo.name, search))
           .map((item) => {
             return <Todo key={item.id} todo={item} />;
           })}

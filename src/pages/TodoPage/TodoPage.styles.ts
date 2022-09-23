@@ -20,8 +20,8 @@ export const TodoDetailsWrapper = styled.div<{
 }>`
   position: relative;
   font-family: "Indie Flower", cursive;
-  width: 400px;
-  height: 600px;
+  width: 40%;
+  height: 90%;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.5) inset;
   padding: 1rem 2rem;
   display: flex;
