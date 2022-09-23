@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { pallete } from "../../misc/pallete";
+import { guessInformationColor } from "./AddTodo.utils";
+import { pallete } from "../../../../misc/pallete";
 
 export const Wrapper = styled.div<{ isDarkMode: boolean }>`
   position: fixed;
@@ -77,10 +78,5 @@ export const ErrorMessageContainer = styled.div<{
   err: boolean;
 }>`
   height: 1.5rem;
-  color: ${(props) =>
-    props.isDarkMode && props.err
-      ? pallete.DarkRed
-      : !props.isDarkMode && props.err
-      ? pallete.Red
-      : pallete.DarkGreen};
+  color: ${(props) => guessInformationColor(props.isDarkMode, props.err)};
 `;

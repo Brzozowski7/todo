@@ -26,6 +26,7 @@
     "AddTodoLoadingBtn":"Warte ab",
     "AddTodoSuccess":"Erfolgreich hinzugefügt Todo",
     "AddTodoFieldsToFillUp":"Bitte füllen Sie die restlichen Pflichtfelder aus",
+    "MainPageNothingToDisplay":"Es gibt keine Todos zum Anzeigen",
     "Yes":"Ja",
     "No":"Nein"
 }

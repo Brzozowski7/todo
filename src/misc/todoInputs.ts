@@ -7,7 +7,7 @@ const todoInputs = [
   },
   {
     id: "AddTodoName",
-    type: "name",
+    type: "text",
     name: "name",
     text: "Name",
   },

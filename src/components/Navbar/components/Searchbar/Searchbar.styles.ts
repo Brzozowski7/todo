@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { pallete } from "../../misc/pallete";
+import { guessSearchBarColor } from "./Searchbar.utils";
+import { pallete } from "../../../../misc/pallete";
 
 interface SearchbarProps {
   isDarkMode: boolean;
@@ -21,13 +22,7 @@ export const SearchbarContainer = styled.div<SearchbarProps>`
   @media screen and (max-width: 900px) {
     width: 60%;
     background-color: ${(props) =>
-      props.isDarkMode && props.active
-        ? pallete.DarkGray
-        : !props.isDarkMode && props.active
-        ? pallete.VeryLightGray
-        : props.isDarkMode && !props.active
-        ? pallete.Black
-        : pallete.AlmostWhite};
+      guessSearchBarColor(props.isDarkMode, props.active)};
   }
 `;
 

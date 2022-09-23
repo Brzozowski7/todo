@@ -17,17 +17,11 @@ import {
   StyledLabelAndInput,
   ErrorMessageContainer,
 } from "./AddTodo.styles";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { DarkModeContext } from "../../../../contexts/DarkModeContext";
 import { variants, today } from "./AddTodo.const";
-import { todoInputs } from "../../misc/todoInputs";
+import { todoInputs } from "../../../../misc/todoInputs";
 import useAddTodoToDb from "./useAddTodoToDb";
 
-interface ITodoDetails {
-  task: string;
-  description: string;
-  name: string;
-  deadline: string;
-}
 interface AddTodoProps {
   active: boolean;
   setActive: Dispatch<SetStateAction<boolean>>;

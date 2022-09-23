@@ -26,6 +26,7 @@
     "AddTodoLoadingBtn":"Attendre",
     "AddTodoSuccess":"Todo ajouté avec succès",
     "AddTodoFieldsToFillUp":"Veuillez remplir le reste des champs obligatoires",
+    "MainPageNothingToDisplay":"Il n'y a pas de Todos à afficher",
     "Yes":"Oui",
     "No":"Non"
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { pallete } from "../../misc/pallete";
+import guessTodoColor from "../../utils/guessTodoColor";
 
 export const TodoPageWrapper = styled.div`
   width: 100%;
@@ -27,23 +28,13 @@ export const TodoDetailsWrapper = styled.div<{
   align-items: center;
   text-align: center;
   background-color: ${(props) =>
-    props.isDarkMode && props.completed
-      ? pallete.DarkGreen
-      : !props.isDarkMode && props.completed
-      ? pallete.Green
-      : props.isDarkMode && props.urgent
-      ? pallete.DarkRed
-      : !props.isDarkMode && props.urgent
-      ? pallete.Red
-      : props.isDarkMode && !props.urgent && !props.completed
-      ? pallete.VeryDarkGray
-      : pallete.VeryLightGray};
+    guessTodoColor(props.isDarkMode, props.completed, props.urgent)};
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
   @media screen and (max-width: 900px) {
     height: 100%;
     width: 100%;
   }
 `;
-export const StyledLink = styled(Link)<{isDarkMode:boolean}>`
+export const StyledLink = styled(Link)<{ isDarkMode: boolean }>`
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
 `;

@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import useDbData from "./useDbData";
 import { MainPageWrapper, AddTodoBtn, TodosWrapper } from "./MainPage.styles";
+import { filterByNameAndTask } from "./MainPage.utils";
 import Todo from "../../components/Todo/Todo";
-import AddTodo from "../../components/AddTodo";
+import AddTodo from "./components/AddTodo";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
 
 interface MainPageProps {
@@ -22,15 +24,16 @@ export default function MainPage({ search }: MainPageProps) {
       </AddTodoBtn>
       <TodosWrapper>
         {todos
-          ?.filter((todo) => {
-            return (
-              todo.name.toLowerCase().startsWith(search.toLowerCase()) ||
-              todo.task.toLowerCase().startsWith(search.toLowerCase())
-            );
-          })
+          ?.filter((todo) => filterByNameAndTask(todo.name, todo.task, search))
           .map((todo) => {
             return <Todo key={todo.id} todo={todo} />;
           })}
+        {todos?.length === 0 && (
+          <FormattedMessage
+            id="MainPageNothingToDisplay"
+            defaultMessage="There is no Todos to display"
+          />
+        )}
       </TodosWrapper>
       <AddTodo active={addTodoActive} setActive={setAddTodoActive} />
     </MainPageWrapper>

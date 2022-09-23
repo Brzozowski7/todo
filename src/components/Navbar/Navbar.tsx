@@ -10,7 +10,7 @@ import {
   LanguagesContainer,
 } from "./Navbar.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
-import Searchbar from "../Searchbar";
+import Searchbar from "./components/Searchbar";
 import { languages } from "../../misc/languagesList";
 
 interface NavbarProps {

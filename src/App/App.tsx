@@ -10,11 +10,13 @@ import UserTodos from "../pages/UserTodos";
 import { messages } from "./App.const";
 
 
+
 function App() {
   const [search, setSearch] = useState("");
   const [language, setLanguage] = useState<string>("en");
   const { isDarkMode } = useContext(DarkModeContext);
   return (
+
     <IntlProvider
       messages={messages[language as keyof typeof messages]}
       locale={language}

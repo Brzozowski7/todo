@@ -10,7 +10,7 @@ import {
   BasicTaskInfo,
 } from "./Todo.styles";
 import { DarkModeContext } from "../../contexts/DarkModeContext";
-import { deleteTodo, markAsComplete, markAsUrgent } from "./Todo.utils";
+import { deleteTodo, toggleIsComplete, toggleIsUrgent } from "./Todo.utils";
 
 interface TodoProps {
   todo: DocumentData;
@@ -46,7 +46,7 @@ function Todo({ todo, intl }: TodoProps) {
       </BasicTaskInfo>
       <IconsContainer>
         <FontAwesomeIcon
-          onClick={() => markAsComplete(todo.completed, todo.id)}
+          onClick={() => toggleIsComplete(todo.completed, todo.id)}
           icon={faCheck}
           size="xl"
           title={
@@ -71,7 +71,7 @@ function Todo({ todo, intl }: TodoProps) {
           })}
         />
         <FontAwesomeIcon
-          onClick={() => markAsUrgent(todo.urgent, todo.id)}
+          onClick={() => toggleIsUrgent(todo.urgent, todo.id)}
           icon={faExclamation}
           size="xl"
           title={

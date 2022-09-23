@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { pallete } from "../../misc/pallete";
+import guessTodoColor from "../../utils/guessTodoColor";
 
 export const TodoWrapper = styled.div<{
   isDarkMode: boolean;
@@ -17,17 +18,7 @@ export const TodoWrapper = styled.div<{
   justify-content: space-around;
   align-items: center;
   background-color: ${(props) =>
-    props.isDarkMode && props.completed
-      ? pallete.DarkGreen
-      : !props.isDarkMode && props.completed
-      ? pallete.Green
-      : props.isDarkMode && props.urgent
-      ? pallete.DarkRed
-      : !props.isDarkMode && props.urgent
-      ? pallete.Red
-      : props.isDarkMode && !props.urgent && !props.completed
-      ? pallete.VeryDarkGray
-      : pallete.VeryLightGray};
+    guessTodoColor(props.isDarkMode, props.completed, props.urgent)};
   color: ${(props) => (props.isDarkMode ? pallete.White : pallete.Black)};
   &:hover {
     cursor: pointer;
