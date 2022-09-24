@@ -5,7 +5,7 @@ import guessTodoColor from "../../utils/guessTodoColor";
 
 export const TodoPageWrapper = styled.div<{ isDarkMode: boolean }>`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,10 +18,9 @@ export const TodoDetailsWrapper = styled.div<{
   urgent: boolean;
   completed: boolean;
 }>`
-  position: relative;
   font-family: "Indie Flower", cursive;
   width: 40%;
-  height: 90%;
+  height:80%;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.5) inset;
   padding: 1rem 2rem;
   display: flex;

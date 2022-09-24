@@ -46,14 +46,15 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
     });
   };
   useEffect(() => {
-    if (typeof status == "string")
+    if (status.added) {
       setTodoDetails({
         task: "",
         description: "",
         name: "",
         deadline: "",
       });
-  }, [status]);
+    }
+  }, [status.added]);
 
   return (
     <Wrapper
@@ -75,14 +76,14 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
         return (
           <StyledLabelAndInput
             isDarkMode={isDarkMode}
-            err={status?.includes(item.name)}
+            err={status.errors?.includes(item.name)}
             key={item.id}
           >
             <label htmlFor={item.id}>
               <FormattedMessage id={item.id} defaultMessage={item.text} />
             </label>
             <input
-              value={todoDetails[item.id as keyof ITodoDetails]}
+              value={todoDetails[item.name as keyof ITodoDetails]}
               type={item.type}
               name={item.name}
               id={item.id}
@@ -121,15 +122,15 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
         )}
       </StyledBtn>
       <ErrorMessageContainer
-        err={typeof status === "object"}
+        err={status.errors?.length > 0}
         isDarkMode={isDarkMode}
       >
-        {typeof status === "object" ? (
+        {status.errors?.length > 0 ? (
           <FormattedMessage
             id="AddTodoFieldsToFillUp"
             defaultMessage="Please fill up the rest of required fields"
           />
-        ) : typeof status === "string" ? (
+        ) : status.added ? (
           <FormattedMessage
             id="AddTodoSuccess"
             defaultMessage="Successfully added Todo"

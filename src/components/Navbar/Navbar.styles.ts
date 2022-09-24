@@ -4,7 +4,7 @@ import { pallete } from "../../misc/pallete";
 
 export const Wrapper = styled.header<{ isDarkMode: boolean }>`
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   padding: 0;
   background-color: ${(props) =>
     props.isDarkMode ? pallete.Black : pallete.White};

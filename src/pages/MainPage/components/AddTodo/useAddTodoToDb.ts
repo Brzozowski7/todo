@@ -3,13 +3,19 @@ import { collection, addDoc } from "firebase/firestore";
 import db from "../../../../backend/firebase";
 import { checkTodo } from "./AddTodo.utils";
 
+interface IStatus {
+  added: boolean;
+  errors: string[];
+}
+
 const useAddTodoToDb = (todoDetails: ITodoDetails) => {
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<string[] | string>();
+  const [status, setStatus] = useState<IStatus>({ added: false, errors: [] });
 
   const submitTodo = async () => {
+    setStatus({ added: false, errors: [] });
     if (checkTodo(todoDetails).length > 0) {
-      setStatus(checkTodo(todoDetails));
+      setStatus({ added: false, errors: checkTodo(todoDetails) });
     } else {
       setLoading(true);
       try {
@@ -22,7 +28,7 @@ const useAddTodoToDb = (todoDetails: ITodoDetails) => {
           completed: false,
           urgent: false,
         });
-        setStatus("Success");
+        setStatus({ added: true, errors: [] });
       } catch (err) {
         console.log(err);
       } finally {

@@ -14,7 +14,7 @@ import { messages } from "./App.const";
 
 function App() {
   const [search, setSearch] = useState("");
-  const [language, setLanguage] = useState<string>("en");
+  const [language, setLanguage] = useState("en");
   const { isDarkMode } = useContext(DarkModeContext);
   return (
     <DarkModeContextProvider>

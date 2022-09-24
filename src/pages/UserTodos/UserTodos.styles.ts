@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { pallete } from "../../misc/pallete";
 
 export const UsersTodosPageWrapper = styled.main<{ isDarkMode: boolean }>`
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

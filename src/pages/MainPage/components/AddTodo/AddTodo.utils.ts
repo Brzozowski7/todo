@@ -4,7 +4,7 @@ export const checkTodo = (todo: ITodoDetails) => {
   let errors: string[] = [];
   Object.keys(todo).forEach((key) => {
     const value = todo[key as keyof ITodoDetails];
-    if (value === "" && key !== "description" && key !== "urgent") {
+    if (value === "" && key !== "description") {
       errors.push(key);
     }
   });

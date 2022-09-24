@@ -4,6 +4,11 @@
   margin: 0;
   user-select: none;
 }
+
 body {
+  min-height: 100%;
   font-family: "Montserrat", sans-serif;
+}
+#root{
+  height: 100%;
 }
