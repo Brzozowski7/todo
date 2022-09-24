@@ -9,10 +9,11 @@ const useLocalStorage = <T>(key: string, initial: T) => {
       console.log(err);
     }
   });
-  const setLocalStorage = (value: string) => {
+  const setLocalStorage = (value: string | ((val: string) => string)) => {
     try {
+      const newValue = value instanceof Function ? value(storedValue) : value;
       localStorage.setItem(key, JSON.stringify(value));
-      setStoredValue(value);
+      setStoredValue(newValue);
     } catch (err) {
       console.log(err);
     }

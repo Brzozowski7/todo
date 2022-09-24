@@ -1,5 +1,4 @@
 import { useState, useContext, Dispatch, SetStateAction } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -52,6 +51,7 @@ export default function Navbar({
           onClick={toggleIsDarkMode}
           icon={isDarkMode ? faSun : faMoon}
           size="xl"
+          title="mode icon"
         />
         <LanguagesContainer>
           {activeLanguageMenu ? (
