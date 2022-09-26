@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState } from "react";
 import { IntlProvider } from "react-intl";
 import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
@@ -26,11 +26,6 @@ describe("testing navbar component", () => {
       </IntlProvider>
     );
   }
-  const AnotherNavbarMock = () => {
-    const { isDarkMode } = useContext(DarkModeContext);
-    return <NavbarMock />;
-  };
-
   test("renders logo correctly", async () => {
     render(<NavbarMock />);
     const logo = screen.getByText(/Todoly/i);
@@ -47,5 +42,5 @@ describe("testing navbar component", () => {
     const flagEl = screen.getByAltText("en");
     expect(flagEl).toBeInTheDocument();
   });
-  test("changes dark mode on click", () => {});
+
 });
