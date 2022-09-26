@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { IntlProvider } from "react-intl";
 import { BrowserRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { messages } from "../../App/App.const";
 import Navbar from "./Navbar";
+import {
+  DarkModeContext,
+  DarkModeContextProvider,
+} from "../../contexts/DarkModeContext";
 
 describe("testing navbar component", () => {
   function NavbarMock() {
@@ -26,6 +30,7 @@ describe("testing navbar component", () => {
       </IntlProvider>
     );
   }
+
   test("renders logo correctly", async () => {
     render(<NavbarMock />);
     const logo = screen.getByText(/Todoly/i);
@@ -42,5 +47,18 @@ describe("testing navbar component", () => {
     const flagEl = screen.getByAltText("en");
     expect(flagEl).toBeInTheDocument();
   });
-
+  test("changes dark mode on click", () => {
+    render(
+      <DarkModeContextProvider>
+        <NavbarMock />
+        <DarkModeContext.Consumer>
+          {(value) => <span>Dark mode: {value.isDarkMode.toString()}</span>}
+        </DarkModeContext.Consumer>
+      </DarkModeContextProvider>
+    );
+    const svgEl = screen.getByTitle("mode icon");
+    expect(screen.getByText("Dark mode: false")).toBeTruthy();
+    fireEvent.click(svgEl);
+    expect(screen.getByText("Dark mode: true")).toBeTruthy();
+  });
 });
