@@ -19,6 +19,7 @@ function Searchbar({ setSearch, search, intl }: SearchbarProps) {
   return (
     <SearchbarContainer isDarkMode={isDarkMode} active={active}>
       <FontAwesomeIcon
+        title="search icon"
         icon={faSearch}
         onClick={() => setActive((prev) => !prev)}
       />
@@ -28,6 +29,7 @@ function Searchbar({ setSearch, search, intl }: SearchbarProps) {
         type="text"
         isDarkMode={isDarkMode}
         active={active}
+        data-testid="search-input"
         placeholder={
           subpage === "user"
             ? intl.formatMessage({
