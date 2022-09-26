@@ -25,6 +25,7 @@ describe("DarkMode context", () => {
         </DarkModeContext.Consumer>
       </DarkModeContextProvider>
     );
+    expect(screen.getByText("Dark mode: false")).toBeTruthy();
     fireEvent.click(screen.getByText("DarkMode"));
     expect(screen.getByText("Dark mode: true")).toBeTruthy();
   });
