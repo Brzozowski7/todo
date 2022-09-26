@@ -67,6 +67,7 @@ export default function Navbar({
             })
           ) : (
             <img
+              data-testid="language-img"
               src={activeFlag.src}
               alt={activeFlag.alt}
               onClick={() => setActiveLanguageMenu(true)}
