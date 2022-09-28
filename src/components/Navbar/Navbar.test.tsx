@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { IntlProvider } from "react-intl";
 import { BrowserRouter } from "react-router-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -7,12 +6,16 @@ import Navbar from "./Navbar";
 import {
   DarkModeContext,
   DarkModeContextProvider,
-} from "../../contexts/DarkModeContext";
+} from "../../contexts/DarkModeContext/DarkModeContext";
 
+interface NavbarMockProps {
+  language: string;
+  search: string;
+}
 describe("testing navbar component", () => {
-  function NavbarMock() {
-    const [search, setSearch] = useState("");
-    const [language, setLanguage] = useState("en");
+  const mockSetState = jest.fn();
+
+  function NavbarMock({ language, search }: NavbarMockProps) {
     return (
       <IntlProvider
         messages={messages[language as keyof typeof messages]}
@@ -21,9 +24,9 @@ describe("testing navbar component", () => {
       >
         <BrowserRouter>
           <Navbar
-            setLanguage={setLanguage}
+            setLanguage={mockSetState}
             language={language}
-            setSearch={setSearch}
+            setSearch={mockSetState}
             search={search}
           />
         </BrowserRouter>
@@ -31,25 +34,28 @@ describe("testing navbar component", () => {
     );
   }
 
-  test("renders logo correctly", async () => {
-    render(<NavbarMock />);
+  test("renders logo correctly", () => {
+    render(<NavbarMock language="en" search="" />);
     const logo = screen.getByText(/Todoly/i);
     expect(logo).toBeInTheDocument();
   });
 
-  test("renders mode icon correctly", async () => {
-    render(<NavbarMock />);
+  test("renders mode icon correctly", () => {
+    render(<NavbarMock language="en" search="" />);
     const svgEl = screen.getByTitle("mode icon");
     expect(svgEl).toBeInTheDocument();
   });
-  test("renders language icon correctly", async () => {
-    render(<NavbarMock />);
-    expect(screen.getByTestId("language-img")).toBeInTheDocument();
-  });
+  test.each([{ alt: "fr" }, { alt: "en" }, { alt: "de" }])(
+    "renders language icon correctly and with correct language",
+    ({ alt }) => {
+      render(<NavbarMock language={alt} search="" />);
+      expect(screen.getByAltText(alt)).toBeInTheDocument();
+    }
+  );
   test("changes dark mode on click", () => {
     render(
       <DarkModeContextProvider>
-        <NavbarMock />
+        <NavbarMock language="en" search="" />
         <DarkModeContext.Consumer>
           {(value) => <span>Dark mode: {value.isDarkMode.toString()}</span>}
         </DarkModeContext.Consumer>
@@ -62,9 +68,12 @@ describe("testing navbar component", () => {
   });
 
   test("show all languages after click", () => {
-    render(<NavbarMock />);
-    const flagEl = screen.getByAltText("en");
+    //when
+    render(<NavbarMock language="en" search="" />);
+    const flagEl = screen.getByTestId("language-img");
     fireEvent.click(flagEl);
+    //then
+    expect(screen.queryAllByTestId("language-choice-img")).toHaveLength(3);
     const frFlag = screen.getByAltText("fr");
     const enFlag = screen.getByAltText("en");
     const deFlag = screen.getByAltText("de");
@@ -72,29 +81,17 @@ describe("testing navbar component", () => {
     expect(enFlag).toBeInTheDocument();
     expect(deFlag).toBeInTheDocument();
   });
-
-  test("changes language to fr", () => {
-    render(<NavbarMock />);
-    const flagEl = screen.getByTestId("language-img");
-    fireEvent.click(flagEl);
-    const frFlag = screen.getByAltText("fr");
-    fireEvent.click(frFlag);
-    expect(screen.getByTestId("language-img")).toBe(screen.getByAltText("fr"));
-  });
-  test("changes language to de", () => {
-    render(<NavbarMock />);
-    const flagEl = screen.getByTestId("language-img");
-    fireEvent.click(flagEl);
-    const deFlag = screen.getByAltText("de");
-    fireEvent.click(deFlag);
-    expect(screen.getByTestId("language-img")).toBe(screen.getByAltText("de"));
-  });
-  test("changes language to en", () => {
-    render(<NavbarMock />);
-    const flagEl = screen.getByTestId("language-img");
-    fireEvent.click(flagEl);
-    const enFlag = screen.getByAltText("en");
-    fireEvent.click(enFlag);
-    expect(screen.getByTestId("language-img")).toBe(screen.getByAltText("en"));
-  });
+  test.each([{ alt: "fr" }, { alt: "en" }, { alt: "de" }])(
+    "checking if correct flag is set up after choosing language",
+    ({ alt }) => {
+      //when
+      render(<NavbarMock language="en" search="" />);
+      const flagEl = screen.getByTestId("language-img");
+      fireEvent.click(flagEl);
+      const currentFlag = screen.getByAltText(alt);
+      fireEvent.click(currentFlag);
+      //then
+      expect(screen.getByAltText(alt)).toBeInTheDocument();
+    }
+  );
 });

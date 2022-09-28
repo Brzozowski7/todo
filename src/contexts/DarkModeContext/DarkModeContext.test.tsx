@@ -3,6 +3,7 @@ import { DarkModeContext, DarkModeContextProvider } from "./DarkModeContext";
 
 describe("DarkMode context", () => {
   test("darkmode is false by default", () => {
+    //when
     render(
       <DarkModeContextProvider>
         <DarkModeContext.Consumer>
@@ -10,9 +11,11 @@ describe("DarkMode context", () => {
         </DarkModeContext.Consumer>
       </DarkModeContextProvider>
     );
+    //then
     expect(screen.getByText("Dark mode: false")).toBeTruthy();
   });
   test("changes dark mode", () => {
+    //when
     render(
       <DarkModeContextProvider>
         <DarkModeContext.Consumer>
@@ -25,8 +28,11 @@ describe("DarkMode context", () => {
         </DarkModeContext.Consumer>
       </DarkModeContextProvider>
     );
+    //then
     expect(screen.getByText("Dark mode: false")).toBeTruthy();
+    //when
     fireEvent.click(screen.getByText("DarkMode"));
+    //then
     expect(screen.getByText("Dark mode: true")).toBeTruthy();
   });
 });

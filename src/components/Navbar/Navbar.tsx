@@ -8,7 +8,7 @@ import {
   LogoContainer,
   LanguagesContainer,
 } from "./Navbar.styles";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import Searchbar from "./components/Searchbar";
 import { languages } from "../../misc/languagesList";
 
@@ -62,6 +62,7 @@ export default function Navbar({
                   key={item.alt}
                   src={item.src}
                   alt={item.alt}
+                  data-testid="language-choice-img"
                 />
               );
             })

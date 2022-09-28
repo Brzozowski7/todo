@@ -7,7 +7,7 @@ import MainPage from "../pages/MainPage";
 import {
   DarkModeContext,
   DarkModeContextProvider,
-} from "../contexts/DarkModeContext";
+} from "../contexts/DarkModeContext/DarkModeContext";
 import TodoPage from "../pages/TodoPage";
 import UserTodos from "../pages/UserTodos";
 import { messages } from "./App.const";

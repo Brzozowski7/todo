@@ -1,14 +1,18 @@
-import { useState } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { IntlProvider } from "react-intl";
 import Searchbar from "./Searchbar";
 import { messages } from "../../../../App/App.const";
 import { BrowserRouter } from "react-router-dom";
 
+interface SearchbarMockProps {
+  search: string;
+}
+
 describe("searchbar component tests", () => {
-  function SearchbarMock() {
-    const [language, setLanguage] = useState("en");
-    const [search, setSearch] = useState("");
+  const mockSetState = jest.fn();
+  const language = "en";
+
+  function SearchbarMock({ search }: SearchbarMockProps) {
     return (
       <IntlProvider
         messages={messages[language as keyof typeof messages]}
@@ -16,29 +20,33 @@ describe("searchbar component tests", () => {
         defaultLocale="en"
       >
         <BrowserRouter>
-          <Searchbar setSearch={setSearch} search={search} />;
+          <Searchbar setSearch={mockSetState} search={search} />;
         </BrowserRouter>
       </IntlProvider>
     );
   }
-  const resizeWindow = (x: number, y: number) => {
-    window.innerWidth = x;
-    window.innerHeight = y;
-    window.dispatchEvent(new Event("resize"));
-  };
 
   test("renders input correctly", () => {
-    render(<SearchbarMock />);
+    //when
+    render(<SearchbarMock search="" />);
+    //then
     expect(screen.getByTestId("search-input")).toBeInTheDocument();
   });
   test("renders search icon correctly", () => {
-    render(<SearchbarMock />);
+    //when
+    render(<SearchbarMock search="" />);
+    //then
     expect(screen.getByTitle("search icon")).toBeInTheDocument();
   });
-  test.skip("input is not visible by default on small resolution", () => {
-    resizeWindow(500,500)
-    render(<SearchbarMock />);
-    console.log("innerwidth:",window.innerWidth)
-    expect(screen.getByTestId("search-input")).not.toBeVisible();
+  test("calls state function on input change", () => {
+    //given
+    const testValue = "test"
+    //when
+    render(<SearchbarMock search="" />);
+    fireEvent.change(screen.getByTestId("search-input"), {
+      target: { value: testValue },
+    });
+    //then
+    expect(mockSetState).toHaveBeenCalledWith(testValue);
   });
 });

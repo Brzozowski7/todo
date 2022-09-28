@@ -17,7 +17,7 @@ import {
   StyledLabelAndInput,
   ErrorMessageContainer,
 } from "./AddTodo.styles";
-import { DarkModeContext } from "../../../../contexts/DarkModeContext";
+import { DarkModeContext } from "../../../../contexts/DarkModeContext/DarkModeContext";
 import { variants, today } from "./AddTodo.const";
 import { todoInputs } from "../../../../misc/todoInputs";
 import useAddTodoToDb from "./useAddTodoToDb";
@@ -37,7 +37,9 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
   });
   const { submitTodo, loading, status } = useAddTodoToDb(todoDetails);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setTodoDetails((prev) => {
       return {
         ...prev,
@@ -64,6 +66,7 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
       animate={active ? "open" : "closed"}
       variants={variants}
       transition={{ duration: 1 }}
+      data-testid="AddTodo-form-wrapper"
     >
       <IconContainer>
         <FontAwesomeIcon
@@ -88,7 +91,8 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
               name={item.name}
               id={item.id}
               min={today}
-              onChange={(e) => handleChange(e)}
+              data-testid={item.testID}
+              onChange={handleChange}
             />
           </StyledLabelAndInput>
         );
@@ -102,14 +106,9 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
       <textarea
         value={todoDetails.description}
         id="description"
-        onChange={(e) =>
-          setTodoDetails((prev) => {
-            return {
-              ...prev,
-              description: e.target.value,
-            };
-          })
-        }
+        name="description"
+        onChange={handleChange}
+        data-testid="description-textarea"
       />
       <StyledBtn onClick={submitTodo} isDarkMode={isDarkMode}>
         {loading ? (
@@ -125,18 +124,17 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
         err={status.errors?.length > 0}
         isDarkMode={isDarkMode}
       >
-        {status.errors?.length > 0 ? (
+        {status.errors?.length > 0 && (
           <FormattedMessage
             id="AddTodoFieldsToFillUp"
             defaultMessage="Please fill up the rest of required fields"
           />
-        ) : status.added ? (
+        )}
+        {status.added && (
           <FormattedMessage
             id="AddTodoSuccess"
             defaultMessage="Successfully added Todo"
           />
-        ) : (
-          ""
         )}
       </ErrorMessageContainer>
     </Wrapper>

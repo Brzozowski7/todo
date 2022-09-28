@@ -8,7 +8,7 @@ import {
 } from "./TodoPage.styles";
 import useGetTodoDetails from "./useGetTodoDetails";
 import { calculateTimeLeft } from "./TodoPage.utils";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 
 export default function TodoPage() {
   const { isDarkMode } = useContext(DarkModeContext);

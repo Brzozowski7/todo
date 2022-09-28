@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import useGetUserTodos from "./useGetUserTodos";
 import { UsersTodosPageWrapper, TodosWrapper } from "./UserTodos.styles";
 import { filterByTask } from "./UserTodos.utils";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import Todo from "../../components/Todo";
 
 interface UserTodoProps {

@@ -35,3 +35,24 @@ export const fakeFormInput = [
     urgent: true,
   },
 ];
+export const testTodo = {
+  task: "Homework",
+  name: "Mark",
+  completed: false,
+  urgent: false,
+  id: "HfjnoZFsSSr9XbE4Yc4X",
+};
+export const testCompletedTodo = {
+  task: "Homework",
+  name: "Mark",
+  completed: true,
+  urgent: false,
+  id: "HfjnoZFsSSr9XbE4Yc4X",
+};
+export const testUrgentTodo = {
+  task: "Homework",
+  name: "Mark",
+  completed: false,
+  urgent: true,
+  id: "HfjnoZFsSSr9XbE4Yc4X",
+};

@@ -14,8 +14,9 @@ const useAddTodoToDb = (todoDetails: ITodoDetails) => {
 
   const submitTodo = async () => {
     setStatus({ added: false, errors: [] });
-    if (checkTodo(todoDetails).length > 0) {
-      setStatus({ added: false, errors: checkTodo(todoDetails) });
+    const errors = checkTodo(todoDetails);
+    if (errors.length > 0) {
+      setStatus({ added: false, errors: errors });
     } else {
       setLoading(true);
       try {

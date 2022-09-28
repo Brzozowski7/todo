@@ -5,7 +5,7 @@ import { MainPageWrapper, AddTodoBtn, TodosWrapper } from "./MainPage.styles";
 import { filterByNameAndTask } from "./MainPage.utils";
 import Todo from "../../components/Todo/Todo";
 import AddTodo from "./components/AddTodo";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 
 interface MainPageProps {
   search: string;

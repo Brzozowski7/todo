@@ -9,7 +9,7 @@ import {
   IconsContainer,
   BasicTaskInfo,
 } from "./Todo.styles";
-import { DarkModeContext } from "../../contexts/DarkModeContext";
+import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
 import { deleteTodo, toggleIsComplete, toggleIsUrgent } from "./Todo.utils";
 
 interface TodoProps {
@@ -26,15 +26,17 @@ function Todo({ todo, intl }: TodoProps) {
       isDarkMode={isDarkMode}
       urgent={todo.urgent}
       completed={todo.completed}
+      data-testid="todo-wrapper"
     >
       <BasicTaskInfo
         to={"/todo/" + todo.id}
         isDarkMode={isDarkMode}
         onMouseOver={() => setIsHovering(true)}
         onMouseOut={() => setIsHovering(false)}
+        data-testid="todo-info-container"
       >
         <h2>{todo.task}</h2>
-        <p> {todo?.name}</p>
+        <p> {todo.name}</p>
         <TipContainer>
           {isHovering && (
             <FormattedMessage
@@ -44,7 +46,7 @@ function Todo({ todo, intl }: TodoProps) {
           )}
         </TipContainer>
       </BasicTaskInfo>
-      <IconsContainer>
+      <IconsContainer >
         <FontAwesomeIcon
           onClick={() => toggleIsComplete(todo.completed, todo.id)}
           icon={faCheck}
@@ -60,6 +62,7 @@ function Todo({ todo, intl }: TodoProps) {
                   defaultMessage: "Click to mark as done",
                 })
           }
+          data-testid="complete-icon"
         />
         <FontAwesomeIcon
           onClick={() => deleteTodo(todo.id)}
@@ -69,6 +72,7 @@ function Todo({ todo, intl }: TodoProps) {
             id: "TodoRemove",
             defaultMessage: "Click to remove",
           })}
+          data-testid="remove-icon"
         />
         <FontAwesomeIcon
           onClick={() => toggleIsUrgent(todo.urgent, todo.id)}
@@ -81,10 +85,11 @@ function Todo({ todo, intl }: TodoProps) {
                   defaultMessage: "Click to remove urgent status",
                 })
               : intl.formatMessage({
-                id: "TodoAddUrgent",
-                defaultMessage: "Click to mark as urgent",
-              })
+                  id: "TodoAddUrgent",
+                  defaultMessage: "Click to mark as urgent",
+                })
           }
+          data-testid="urgent-icon"
         />
       </IconsContainer>
     </TodoWrapper>
