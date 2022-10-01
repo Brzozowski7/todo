@@ -50,8 +50,9 @@ export default function Navbar({
         <FontAwesomeIcon
           onClick={toggleIsDarkMode}
           icon={isDarkMode ? faSun : faMoon}
+          title={isDarkMode ? "sun-icon" : "moon-icon"}
           size="xl"
-          title="mode icon"
+          data-testid="mode-icon"
         />
         <LanguagesContainer>
           {activeLanguageMenu ? (

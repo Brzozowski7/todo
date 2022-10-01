@@ -1,42 +1,59 @@
-import { IntlProvider } from "react-intl";
-import { BrowserRouter } from "react-router-dom";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import MainPage from "./MainPage";
-import { messages } from "../../App/App.const";
+import withProviders from "../../hoc/withProviders";
 
-interface MainPageMockProps {
-  search: string;
-}
+let todosMock = [
+  { id: "1", name: "abc1", task: "zxc1" },
+  { id: "2", name: "abc2", task: "zxc2" },
+  { id: "3", name: "abc3", task: "zxc3" },
+];
 
-describe("testing todo component", () => {
-  const language = "en";
-  function MainPageMock({ search }: MainPageMockProps) {
-    return (
-      <IntlProvider
-        messages={messages[language as keyof typeof messages]}
-        locale={language}
-        defaultLocale="en"
-      >
-        <BrowserRouter>
-          <MainPage search={search} />
-        </BrowserRouter>
-      </IntlProvider>
-    );
-  }
+jest.mock("./useDbData", () => ({
+  __esModule: true,
+  default: () => todosMock,
+}));
+
+const MainPageWithProviders = withProviders(MainPage);
+
+describe("MainPage test", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test("renders btn to add todo", () => {
     //when
-    render(<MainPageMock search="" />);
+    render(<MainPageWithProviders language="en" search="" />);
     //then
     expect(screen.getByText("+")).toBeInTheDocument();
   });
   test("shows addTodo menu on btn click", async () => {
     //when
-    render(<MainPageMock search="" />);
+    render(<MainPageWithProviders language="en" search="" />);
     expect(screen.getByTestId("AddTodo-form-wrapper")).not.toBeVisible();
     fireEvent.click(screen.getByText("+"));
     //then
     await waitFor(() => {
-        expect(screen.getByTestId("AddTodo-form-wrapper")).toBeVisible();
+      expect(screen.getByTestId("AddTodo-form-wrapper")).toBeVisible();
     });
+  });
+  test("should display todos list", () => {
+    //when
+    render(<MainPageWithProviders language="en" search="" />);
+    const TodosWrapper = screen.getByTestId("main-page-todos-wrapper");
+    //then
+    expect(TodosWrapper.childElementCount).toBe(todosMock.length);
+    todosMock.forEach((item) => {
+      expect(screen.getByText(item.name)).toBeInTheDocument();
+    });
+  });
+  test("should display one todo with task zxc2", () => {
+    //when
+    render(<MainPageWithProviders language="en" search="zxc2" />);
+    const TodosWrapper = screen.getByTestId("main-page-todos-wrapper");
+    //then
+    expect(TodosWrapper.childElementCount).toBe(1);
+    expect(screen.queryByText("zxc3")).not.toBeInTheDocument();
+    expect(screen.queryByText("zxc1")).not.toBeInTheDocument();
+    expect(screen.getByText("zxc2")).toBeInTheDocument();
   });
 });

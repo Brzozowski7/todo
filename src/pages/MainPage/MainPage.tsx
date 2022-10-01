@@ -15,14 +15,14 @@ export default function MainPage({ search }: MainPageProps) {
   const todos = useDbData();
   const { isDarkMode } = useContext(DarkModeContext);
   return (
-    <MainPageWrapper isDarkMode={isDarkMode}>
+    <MainPageWrapper isDarkMode={isDarkMode} >
       <AddTodoBtn
         onClick={() => setAddTodoActive(true)}
         isDarkMode={isDarkMode}
       >
         +
       </AddTodoBtn>
-      <TodosWrapper>
+      <TodosWrapper data-testid="main-page-todos-wrapper">
         {todos
           ?.filter((todo) => filterByNameAndTask(todo.name, todo.task, search))
           .map((todo) => {

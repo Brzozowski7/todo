@@ -15,7 +15,6 @@ function Searchbar({ setSearch, search, intl }: SearchbarProps) {
   const { isDarkMode } = useContext(DarkModeContext);
   const [active, setActive] = useState(false);
   const subpage = useLocation().pathname.split("/")[1];
-
   return (
     <SearchbarContainer isDarkMode={isDarkMode} active={active}>
       <FontAwesomeIcon

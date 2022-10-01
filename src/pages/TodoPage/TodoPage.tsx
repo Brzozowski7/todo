@@ -15,7 +15,6 @@ export default function TodoPage() {
   const { todoID } = useParams();
   const todo = useGetTodoDetails(todoID!);
   const { days, hours } = calculateTimeLeft(todo?.deadline);
-
   return (
     <TodoPageWrapper isDarkMode={isDarkMode}>
       {todo && (
@@ -64,9 +63,17 @@ export default function TodoPage() {
               id="TodoPageTimeLeft"
               defaultMessage="Time left"
             />
-            : {days}{" "}
-            <FormattedMessage id="TodoPageDays" defaultMessage="days" /> {hours}{" "}
-            <FormattedMessage id="TodoPageHours" defaultMessage="hours" />
+            :{" "}
+            {days >= 0 ? (
+              <>
+                {days}{" "}
+                <FormattedMessage id="TodoPageDays" defaultMessage="days" />
+                {hours}{" "}
+                <FormattedMessage id="TodoPageHours" defaultMessage="hours" />
+              </>
+            ) : (
+              <FormattedMessage id="TodoPageExpired" defaultMessage="Expired" />
+            )}
           </p>
           <p>
             <FormattedMessage id="TodoPageUrgent" defaultMessage="Urgent" />:{" "}

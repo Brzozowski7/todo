@@ -17,13 +17,13 @@ export default function UserTodos({ search }: UserTodoProps) {
   const userTodos = useGetUserTodos(user!);
   return (
     <UsersTodosPageWrapper isDarkMode={isDarkMode}>
-      <h1>
+      <h1 data-testid="user-todos-heading">
         <FormattedMessage id="UsersTodoAllOf" defaultMessage="All Todos of" />{" "}
         {user}
       </h1>
-      <TodosWrapper>
+      <TodosWrapper data-testid="user-todos-wrapper">
         {userTodos
-          .filter((todo) => filterByTask(todo.name, search))
+          .filter((todo) => filterByTask(todo.task, search))
           .map((item) => {
             return <Todo key={item.id} todo={item} />;
           })}
