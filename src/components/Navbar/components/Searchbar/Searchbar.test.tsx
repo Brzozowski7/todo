@@ -45,6 +45,7 @@ describe("searchbar component tests", () => {
       target: { value: testValue },
     });
     //then
+    expect(mockSetState).toHaveBeenCalledTimes(1);
     expect(mockSetState).toHaveBeenCalledWith(testValue);
   });
 });

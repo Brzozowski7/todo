@@ -30,7 +30,7 @@ describe("MainPage test", () => {
     //when
     render(<MainPageWithProviders language="en" search="" />);
     expect(screen.getByTestId("AddTodo-form-wrapper")).not.toBeVisible();
-    fireEvent.click(screen.getByText("+"));
+    fireEvent.click(screen.getByTestId("mainPage-addTodoBtn"));
     //then
     await waitFor(() => {
       expect(screen.getByTestId("AddTodo-form-wrapper")).toBeVisible();

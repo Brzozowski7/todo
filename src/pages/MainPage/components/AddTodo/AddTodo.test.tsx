@@ -1,13 +1,11 @@
+import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import AddTodo from "./AddTodo";
-import React from "react";
 import withProviders from "../../../../hoc/withProviders";
 
-
 describe("testing todo component", () => {
- 
   const AddTodoWithProviders = withProviders(AddTodo);
-  
+
   test.each([
     { testid: "task-input" },
     { testid: "name-input" },

@@ -19,6 +19,7 @@ export default function MainPage({ search }: MainPageProps) {
       <AddTodoBtn
         onClick={() => setAddTodoActive(true)}
         isDarkMode={isDarkMode}
+        data-testid="mainPage-addTodoBtn"
       >
         +
       </AddTodoBtn>
