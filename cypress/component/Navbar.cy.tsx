@@ -5,7 +5,6 @@ const NavbarWithProviders = withProviders(Navbar)
 
 
 describe('Cypress', () => {   
-  
   it('renders Navbar', () => {   
       cy.mount(<NavbarWithProviders language="en"/>) 
   })
