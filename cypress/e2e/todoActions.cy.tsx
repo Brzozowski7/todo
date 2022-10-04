@@ -37,6 +37,7 @@ describe("App test", () => {
       .parent()
       .parent()
       .should("have.css", "background-color", "rgb(0, 255, 0)");
+    //when
     cy.get('[data-testid="main-page-todos-wrapper"]')
       .children()
       .contains("h2", "TestTodo")
@@ -69,6 +70,7 @@ describe("App test", () => {
       .parent()
       .parent()
       .should("have.css", "background-color", "rgb(255, 0, 0)");
+    //when
     cy.get('[data-testid="main-page-todos-wrapper"]')
       .children()
       .contains("h2", "TestTodo")
