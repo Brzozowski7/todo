@@ -42,4 +42,18 @@ describe("Searchbar actions", () => {
       .contains("Homework")
       .should("not.exist");
   });
+  it("Searchbar not visible on mobile", () => {
+    cy.visit("localhost:3000");
+    cy.viewport(500, 500);
+    cy.get('[data-testid="search-input"]').should("not.be.visible");
+  });
+  it("Searchbar toggles after icon click on mobile", () => {
+    cy.visit("localhost:3000");
+    cy.viewport(500, 500);
+    cy.get('[data-testid="search-input"]').should("not.be.visible");
+    cy.get(".sc-jSMfEi > .svg-inline--fa").click();
+    cy.get('[data-testid="search-input"]').should("be.visible");
+    cy.get(".sc-jSMfEi > .svg-inline--fa").click();
+    cy.get('[data-testid="search-input"]').should("not.be.visible");
+  });
 });
