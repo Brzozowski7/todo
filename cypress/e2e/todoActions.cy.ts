@@ -18,7 +18,8 @@ describe("App test", () => {
       .last()
       .contains("Successfully added Todo");
     cy.get('[data-testid="main-page-todos-wrapper"]')
-      .contains("h2", "TestTodo");
+      .contains("h2", "TestTodo")
+      .should("exist");
   });
   it("toggle todo as complete/uncomplete", () => {
     //when
@@ -102,4 +103,4 @@ describe("App test", () => {
   });
 });
 
-export {}
+export {};

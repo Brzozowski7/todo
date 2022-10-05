@@ -5,9 +5,18 @@ describe("Searchbar actions", () => {
     cy.get('[data-testid="search-input"]');
     cy.get('[data-testid="search-input"]').type("Roman");
     //then
-    cy.get('[data-testid="main-page-todos-wrapper"]').contains("Roman");
-    cy.get('[data-testid="main-page-todos-wrapper"]').contains("Go to doctor");
-    cy.get('[data-testid="main-page-todos-wrapper"]').contains("Homework");
+    cy.get('[data-testid="main-page-todos-wrapper"]').should(
+      "contain",
+      "Roman"
+    );
+    cy.get('[data-testid="main-page-todos-wrapper"]').should(
+      "contain",
+      "Go to doctor"
+    );
+    cy.get('[data-testid="main-page-todos-wrapper"]').should(
+      "contain",
+      "Homework"
+    );
     cy.get('[data-testid="main-page-todos-wrapper"]')
       .contains("Franek")
       .should("not.exist");
@@ -16,8 +25,11 @@ describe("Searchbar actions", () => {
     cy.get('[data-testid="search-input"]');
     cy.get('[data-testid="search-input"]').type("Go shopping");
     //then
-    cy.get('[data-testid="main-page-todos-wrapper"]').contains("Ania");
-    cy.get('[data-testid="main-page-todos-wrapper"]').contains("Franek");
+    cy.get('[data-testid="main-page-todos-wrapper"]').should("contain", "Ania");
+    cy.get('[data-testid="main-page-todos-wrapper"]').should(
+      "contain",
+      "Franek"
+    );
     cy.get('[data-testid="main-page-todos-wrapper"]')
       .contains("Roman")
       .should("not.exist");
@@ -48,12 +60,18 @@ describe("Searchbar actions", () => {
     cy.get('[data-testid="search-input"]').should("not.be.visible");
   });
   it("Searchbar toggles after icon click on mobile", () => {
+    //when
     cy.visit("localhost:3000");
     cy.viewport(500, 500);
+    //then
     cy.get('[data-testid="search-input"]').should("not.be.visible");
+    //when
     cy.get(".sc-jSMfEi > .svg-inline--fa").click();
+    //then
     cy.get('[data-testid="search-input"]').should("be.visible");
+    //when
     cy.get(".sc-jSMfEi > .svg-inline--fa").click();
+    //then
     cy.get('[data-testid="search-input"]').should("not.be.visible");
   });
 });
