@@ -18,7 +18,6 @@ describe("App test", () => {
       .last()
       .contains("Successfully added Todo");
     cy.get('[data-testid="main-page-todos-wrapper"]')
-      .first()
       .contains("h2", "TestTodo");
   });
   it("toggle todo as complete/uncomplete", () => {

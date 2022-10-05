@@ -32,7 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "emulator":"firebase emulators:start --import sample-todos"
   },
   "eslintConfig": {
     "extends": [
