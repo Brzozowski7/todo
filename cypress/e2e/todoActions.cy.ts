@@ -102,3 +102,5 @@ describe("App test", () => {
       .should("not.exist");
   });
 });
+
+export {}
