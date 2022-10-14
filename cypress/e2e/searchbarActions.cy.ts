@@ -66,12 +66,13 @@ describe("Searchbar actions", () => {
     //then
     cy.get('[data-testid="search-input"]').should("not.be.visible");
     //when
-    cy.get(".sc-jSMfEi > .svg-inline--fa").click();
+    cy.get('[data-testid="search-icon"]').click();
     //then
     cy.get('[data-testid="search-input"]').should("be.visible");
     //when
-    cy.get(".sc-jSMfEi > .svg-inline--fa").click();
+    cy.get('[data-testid="search-icon"]').click();
     //then
     cy.get('[data-testid="search-input"]').should("not.be.visible");
   });
 });
+export {};

@@ -2,7 +2,7 @@ describe("router test", () => {
   it("logo click takes to homepage", () => {
     //when
     cy.visit("localhost:3000/user/Roman");
-    cy.get(".sc-hKMtZM").click();
+    cy.get("header").contains("Todoly").click();
     //then
     cy.location("pathname").should("eq", "/");
   });
@@ -16,8 +16,9 @@ describe("router test", () => {
   it("takes to users todos on All Todos of click (todopage)", () => {
     //when
     cy.visit("localhost:3000/todo/7Zl688PyD0leVPvfzW7x");
-    cy.get('.sc-dIouRR').click();
+    cy.get('[data-testid="allTodos-link"]').click();
     //then
     cy.location("pathname").should("match", /\/user/);
   });
 });
+export {}

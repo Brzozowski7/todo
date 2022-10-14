@@ -21,6 +21,7 @@ function Searchbar({ setSearch, search, intl }: SearchbarProps) {
         title="search icon"
         icon={faSearch}
         onClick={() => setActive((prev) => !prev)}
+        data-testid="search-icon"
       />
       <SearchbarInput
         onChange={(e) => setSearch(e.target.value)}
