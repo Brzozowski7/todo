@@ -1,13 +1,20 @@
 describe("dark mode test", () => {
   beforeEach(() => {
     cy.visit("localhost:3000");
-  })
+  });
   it("toggles darkmode", () => {
-    //when
-    cy.get("header").contains("title", "moon-icon").click({ force: true });
-    cy.get("header").should("contain", "sun-icon");
-    cy.get("header").contains("title", "sun-icon").click({ force: true });
-    cy.get("header").should("contain", "moon-icon");
+    cy.get("header").within(() => {
+      cy.contains("title", "moon-icon")
+        //when
+        .click({ force: true })
+        //then
+        .should("contain", "sun-icon");
+      cy.contains("title", "sun-icon")
+        //when
+        .click({ force: true })
+        //then
+        .should("contain", "moon-icon");
+    });
   });
   it("remebers dark mode after refresh", () => {
     //when
