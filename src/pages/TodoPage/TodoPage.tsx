@@ -35,7 +35,7 @@ export default function TodoPage() {
             <FormattedMessage id="TodoPageAddedBy" defaultMessage="Added By" />:{" "}
             {todo.name}
           </p>
-          <StyledLink to={"/user/" + todo?.name} isDarkMode={isDarkMode}>
+          <StyledLink to={"/user/" + todo?.name} isDarkMode={isDarkMode} data-testid="allTodos-link">
             <FormattedMessage id="AllTodosLink" defaultMessage="All Todos of" />{" "}
             {todo.name}
           </StyledLink>

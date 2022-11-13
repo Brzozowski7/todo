@@ -110,7 +110,7 @@ export default function AddTodo({ active, setActive }: AddTodoProps) {
         onChange={handleChange}
         data-testid="description-textarea"
       />
-      <StyledBtn onClick={submitTodo} isDarkMode={isDarkMode}>
+      <StyledBtn onClick={submitTodo} isDarkMode={isDarkMode} data-testID="addTodoBtn">
         {loading ? (
           <FormattedMessage
             id="AddTodoLoadingBtn"
